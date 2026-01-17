@@ -37,8 +37,12 @@ dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarc
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 
 # Installing basic packages
-dnf -y install chrony dnf-plugins-core net-tools htop vim openssl wget curl
- 
+dnf -y install chrony dnf-plugins-core net-tools htop vim openssl wget curl mlocate
+
+# Add the freeswitch user
+useradd -r -g daemon -d /var/lib/freeswitch -s /sbin/nologin -c "FreeSWITCH daemon user" freeswitch
+
+
 # Disable SELinux
 resources/selinux.sh
 
