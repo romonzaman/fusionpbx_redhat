@@ -5,7 +5,7 @@ cd "$(dirname "$0")"
 
 IRONTEC="[irontec]
 name=Irontec RPMs repository
-baseurl=http://packages.irontec.com/centos/\$releasever/\$basearch/"
+baseurl=https://packages.irontec.com/centos/8/\$basearch/"
 echo "${IRONTEC}" > /etc/yum.repos.d/irontec.repo
 rpm --import http://packages.irontec.com/public.key
-yum -y install sngrep
+dnf -y install sngrep

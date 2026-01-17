@@ -8,16 +8,16 @@ cd "$(dirname "$0")"
 . ../colors.sh
 
 #upgrade packages
-yum update && yum upgrade -y
+dnf -y upgrade --refresh
 
-yum -y install memcached curl gdb
+dnf -y install memcached curl gdb
 
 #install build dependencies
-yum install -y autoconf automake libtool gcc-c++ ncurses-devel zlib-devel libjpeg-devel openssl-devel libcurl-devel pcre-devel lua-devel libedit-devel libuuid-devel speex-devel libogg-devel libvorbis-devel curl-devel ldns-devel libsndfile-devel libtheora-devel
+dnf -y install autoconf automake libtool gcc-c++ ncurses-devel zlib-devel libjpeg-devel openssl-devel libcurl-devel pcre-devel lua-devel libedit-devel libuuid-devel speex-devel libogg-devel libvorbis-devel curl-devel ldns-devel libsndfile-devel libtheora-devel
 
 #install additional depdendencies
-yum install -y libjpeg-devel sqlite-devel libpng-devel libtiff-devel libX11-devel e2fsprogs-devel openldap-devel libyuv-devel
-yum install -y sox sqlite3 unzip
+dnf -y install libjpeg-devel sqlite-devel libpng-devel libtiff-devel libX11-devel e2fsprogs-devel openldap-devel libyuv-devel
+dnf -y install sox sqlite3 unzip
 
 #we are about to move out of the executing directory so we need to preserve it to return after we are done
 CWD=$(pwd)
@@ -26,7 +26,7 @@ CWD=$(pwd)
 if [ $(echo "$switch_version" | tr -d '.') -gt 1100 ]; then
 
 	# libks build-requirements
-	apt install -y cmake uuid-dev
+	dnf -y install cmake libuuid-devel
 
 	# libks
 	cd /usr/src

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# CentOS 7 install
+# Red Hat Enterprise Linux 8.10 install
 
 #move to script directory so all relative paths work
 cd "$(dirname "$0")"
@@ -9,15 +9,35 @@ cd "$(dirname "$0")"
 . ./resources/config.sh
 . ./resources/colors.sh
 
-# Update CentOS 
-verbose "Updating CentOS"
-yum -y update && yum -y upgrade
+#ensure RHEL 8.x
+if [ -f /etc/os-release ]; then
+	. /etc/os-release
+	if [ .$ID != .rhel ]; then
+		error "This installer is for Red Hat Enterprise Linux"
+		exit 3
+	fi
+	case "$VERSION_ID" in
+		8.10) ;;
+		8.*) warning "Tested on RHEL 8.10, continuing on $VERSION_ID" ;;
+		*) error "Unsupported RHEL version $VERSION_ID"; exit 3 ;;
+	esac
+fi
 
-# Add additional repository
-yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+# Update RHEL
+verbose "Updating RHEL"
+dnf -y upgrade --refresh
 
-# Installing basics packages
-yum -y install ntp yum-utils net-tools epel-release htop vim openssl
+# enable repos when subscription-manager is available
+if command -v subscription-manager >/dev/null 2>&1; then
+	subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms || warning "Unable to enable CodeReady Builder repo"
+fi
+
+# Add additional repositories (EPEL, Remi)
+dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+# Installing basic packages
+dnf -y install chrony dnf-plugins-core net-tools htop vim openssl wget curl
  
 # Disable SELinux
 resources/selinux.sh

@@ -11,7 +11,7 @@ cd "$(dirname "$0")"
 verbose "Installing the web server"
 
 #install dependencies
-yum -y install nginx
+dnf -y install nginx
 
 #setup nginx
 mkdir -p /etc/nginx/sites-available

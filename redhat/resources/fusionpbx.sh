@@ -11,13 +11,13 @@ cd "$(dirname "$0")"
 verbose "Installing FusionPBX"
 
 #install dependencies
-yum -y install git
-yum -y install ghostscript libtiff-devel libtiff-tools at
+dnf -y install git
+dnf -y install ghostscript libtiff-devel libtiff-tools at
 
 #forensics tools
-wget https://forensics.cert.org/cert-forensics-tools-release-el7.rpm
-rpm -Uvh cert-forensics-tools-release*rpm
-yum -y --enablerepo=forensics install lame
+wget https://forensics.cert.org/cert-forensics-tools-release-el8.rpm
+dnf -y install cert-forensics-tools-release-el8.rpm
+dnf -y --enablerepo=forensics install lame
 
 #get the branch
 if [ .$system_branch = .'master' ]; then

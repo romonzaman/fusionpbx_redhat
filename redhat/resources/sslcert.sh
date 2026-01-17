@@ -1,4 +1,4 @@
-# no default SSL in centos, generate a tmp certificate
+# no default SSL in RHEL, generate a tmp certificate
 # ssl_certificate         /etc/ssl/certs/nginx.crt;
 # ssl_certificate_key     /etc/ssl/private/nginx.key;
 

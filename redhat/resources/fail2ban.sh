@@ -11,7 +11,7 @@ cd "$(dirname "$0")"
 verbose "Installing Fail2ban"
 
 #add the dependencies
-yum -y install fail2ban
+dnf -y install fail2ban
 
 #move the filters
 cp ./fail2ban/freeswitch-dos.conf /etc/fail2ban/filter.d/freeswitch-dos.conf

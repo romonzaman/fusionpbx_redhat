@@ -9,7 +9,7 @@ cd "$(dirname "$0")"
 . ./environment.sh
 
 #make sure unzip is install
-yum install unzip
+dnf -y install unzip
 
 #get the ioncube 64 bit loader
 wget --no-check-certificate https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.zip
@@ -21,11 +21,10 @@ unzip ioncube_loaders_lin_x86-64.zip
 rm ioncube_loaders_lin_x86-64.zip
 
 #copy the php extension .so into the php lib directory
-cp ioncube/ioncube_loader_lin_7.1.so /usr/lib64/php/modules
+cp ioncube/ioncube_loader_lin_8.2.so /usr/lib64/php/modules
 
 #add the 00-ioncube.ini file
-echo "zend_extension = /usr/lib64/php/modules/ioncube_loader_lin_7.1.so" > /etc/php.d/00-ioncube.ini
+echo "zend_extension = /usr/lib64/php/modules/ioncube_loader_lin_8.2.so" > /etc/php.d/00-ioncube.ini
 
 #restart the service
-#service httpd restart
-service php-fpm restart
+systemctl restart php-fpm

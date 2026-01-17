@@ -51,7 +51,7 @@ else
 fi
 	
 if [ .$cpu_architecture = .'arm' ]; then
-	error "CentOS on arm is not supported at this time"
+	error "RHEL on arm is not supported at this time"
 	exit 3
 elif [ .$cpu_architecture = .'x86' ]; then
 	if [ .$os_mode = .'32' ]; then

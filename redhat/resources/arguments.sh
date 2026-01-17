@@ -32,7 +32,7 @@ if [ -z "$CPU_CHECK" ]; then
 	done
 	
 	if [ .$HELP = .true ]; then
-		warning "Debian installer script"
+		warning "Red Hat installer script"
 		warning "	--use-switch-source will use freeswitch from source rather than ${green}(default:packages)"
 		warning "	--use-switch-package-all if using packages use the meta-all package"
 		warning "	--use-switch-package-unofficial-arm if your system is arm and you are using packages, use the unofficial arm repo"

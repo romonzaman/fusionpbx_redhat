@@ -11,12 +11,11 @@ cd "$(dirname "$0")"
 verbose "Install PHP and PHP-FPM"
 
 #set the version of php
-#yum-config-manager --enable remi-php70
-#yum-config-manager --enable remi-php71
-yum-config-manager --enable remi-php72
+dnf -y module reset php
+dnf -y module enable php:remi-8.2
 
 #install dependencies
-yum -y install php-fpm php-gd php-pgsql php-odbc php-curl php-imap php-opcache php-common php-pdo php-soap php-xml php-xmlrpc php-cli php-gd
+dnf -y install php-fpm php-gd php-pgsql php-odbc php-curl php-imap php-opcache php-common php-pdo php-soap php-xml php-cli php-mbstring
 
 #send a message
 verbose "Configuring php/nginx/php-fpm and permissions"
