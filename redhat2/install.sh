@@ -13,7 +13,7 @@ dnf -y update
 
 #install dependencies
 dnf -y install dnf-plugins-core epel-release
-dnf -y install chrony curl wget net-tools htop vim openssl ca-certificates dialog
+dnf -y install chrony curl wget net-tools htop vim openssl ca-certificates dialog nano mlocate
 
 #enable remi repository for PHP packages
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
@@ -28,6 +28,13 @@ echo "set mouse-=a" >> ~/.vimrc
 
 #Disable SELinux
 resources/selinux.sh
+
+useradd -r \
+  -g daemon \
+  -d /var/lib/freeswitch \
+  -s /sbin/nologin \
+  -c "FreeSWITCH daemon user" \
+  freeswitch
 
 #FusionPBX
 resources/fusionpbx.sh
