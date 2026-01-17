@@ -12,7 +12,8 @@ verbose "Installing FusionPBX"
 
 #install dependencies
 dnf -y install git
-dnf -y install ghostscript libtiff-devel libtiff-tools at
+#dnf -y install ghostscript libtiff-devel libtiff-tools at
+dnf -y install ghostscript libtiff-devel at
 
 #forensics tools
 wget https://forensics.cert.org/cert-forensics-tools-release-el8.rpm
