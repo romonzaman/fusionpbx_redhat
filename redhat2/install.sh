@@ -75,7 +75,7 @@ verbose "FusionPBX Installed"
 
 #Postgres
 #resources/postgresql.sh
-password=sdSkudzaI9eVRnaLvZKiDB43Jk
+password=${database_password}
 sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 sudo dnf -y module disable postgresql
 sudo dnf install -y postgresql14-server postgresql14-contrib postgresql14 postgresql14-libs
