@@ -11,7 +11,8 @@ cd "$(dirname "$0")"
 verbose "Installing PostgreSQL"
 
 #generate a random password
-password=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64)
+# password=$(dd if=/dev/urandom bs=1 count=20 2>/dev/null | base64)
+password=sdSkudzaI9eVRnaLvZKiDB43Jk
 
 # Install the repository
 sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
