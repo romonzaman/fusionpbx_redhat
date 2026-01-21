@@ -7,17 +7,22 @@ cd "$(dirname "$0")"
 . ../config.sh
 . ../colors.sh
 
-#upgrade packages
-yum update && yum upgrade -y
+#upgrade packages (RHEL 8.x)
+dnf -y update
 
-yum -y install memcached curl gdb
+dnf -y install memcached curl gdb git wget
 
 #install build dependencies
-yum install -y autoconf automake libtool gcc-c++ ncurses-devel zlib-devel libjpeg-devel openssl-devel libcurl-devel pcre-devel lua-devel libedit-devel libuuid-devel speex-devel libogg-devel libvorbis-devel curl-devel ldns-devel libsndfile-devel libtheora-devel
+dnf -y install autoconf automake libtool gcc-c++ ncurses-devel zlib-devel \
+libjpeg-turbo-devel openssl-devel libcurl-devel pcre-devel libuuid-devel libogg-devel curl-devel
 
-#install additional depdendencies
-yum install -y libjpeg-devel sqlite-devel libpng-devel libtiff-devel libX11-devel e2fsprogs-devel openldap-devel libyuv-devel
-yum install -y sox sqlite3 unzip
+#dnf -y install lua-devel libedit-devel speex-devel libvorbis-devel\
+#libogg-devel ldns-devel libsndfile-devel libtheora-devel
+
+#install additional dependencies
+dnf -y install libjpeg-turbo-devel sqlite-devel libpng-devel libtiff-devel \
+libX11-devel e2fsprogs-devel openldap-devel libyuv-devel
+dnf -y install sox sqlite unzip
 
 #we are about to move out of the executing directory so we need to preserve it to return after we are done
 CWD=$(pwd)
@@ -26,7 +31,7 @@ CWD=$(pwd)
 if [ $(echo "$switch_version" | tr -d '.') -gt 1100 ]; then
 
 	# libks build-requirements
-	apt install -y cmake uuid-dev
+	dnf -y install cmake libuuid-devel libatomic
 
 	# libks
 	cd /usr/src
@@ -94,6 +99,11 @@ if [ $switch_branch = "stable" ]; then
 		#apply patch
 		#patch -u /usr/src/freeswitch/src/mod/databases/mod_pgsql/mod_pgsql.c -i /usr/src/fusionpbx-install.sh/debian/resources/switch/source/mod_pgsql.patch
 	fi
+	dnf -y config-manager --set-enabled powertools
+	dnf -y install epel-release
+	dnf -y makecache
+	dnf -y 	install speex-devel speexdsp-devel libedit-devel nasm ffmpeg-devel
+
 fi
 
 # enable required modules
@@ -114,9 +124,13 @@ sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'#say/mod_say_fr:sa
 sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'applications/mod_signalwire:#applications/mod_signalwire:'
 sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'endpoints/mod_skinny:#endpoints/mod_skinny:'
 sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'endpoints/mod_verto:#endpoints/mod_verto:'
+sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'applications/mod_spandsp:#applications/mod_spandsp:'
+sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'applications/mod_enum:#applications/mod_enum:'
+sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'applications/mod_av:#formats/mod_av:'
 
 # prepare the build
 #./configure --prefix=/usr/local/freeswitch --enable-core-pgsql-support --disable-fhs
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 ./configure -C --enable-portable-binary --disable-dependency-tracking --enable-debug \
 --prefix=/usr --localstatedir=/var --sysconfdir=/etc \
 --with-openssl --enable-core-pgsql-support

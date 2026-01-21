@@ -11,7 +11,7 @@ switch_source=true                          # true (source compile) or false (bi
 switch_package=false                        # true (binary package) or false (source compile)
 switch_version=1.10.12                      # which source code to download, only for source
 switch_tls=true                             # true or false
-switch_token=pat_6Lf1468uyHFMoXwjvhYDT4Z9                               # Get the auth token from https://signalwire.com
+switch_token=                               # Get the auth token from https://signalwire.com
                                             # Signup or Login -> Profile -> Personal Auth Token
 # Sofia-Sip Settings
 sofia_version=1.13.17                       # release-version for sofia-sip to use

@@ -115,13 +115,13 @@ resources/nginx.sh
 resources/php.sh
 
 #Firewalld
-resources/firewalld.sh
+#resources/firewalld.sh
 
 #FreeSWITCH
 resources/switch.sh
 
 #Fail2ban
-resources/fail2ban.sh
+#resources/fail2ban.sh
 
 #add the database schema, user and groups
-resources/finish.sh
+#resources/finish.sh
