@@ -1,7 +1,7 @@
 #cp "$(dirname $0)/source/freeswitch.service.source" /lib/systemd/system/freeswitch.service
 cp "$(dirname $0)/source/freeswitch.service.source" /etc/systemd/system/freeswitch.service
 cp "$(dirname $0)/source/etc.default.freeswitch.source" /etc/default/freeswitch
-sed "s@PIDFile=/run/freeswitch/freeswitch.pid@PIDFile=/usr/local/freeswitch/run/freeswitch.pid@g" -i /etc/systemd/system/freeswitch.service
+#sed "s@PIDFile=/run/freeswitch/freeswitch.pid@PIDFile=/usr/local/freeswitch/run/freeswitch.pid@g" -i /etc/systemd/system/freeswitch.service
 
 if [ -e /proc/user_beancounters ]
 then

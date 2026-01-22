@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 #includes
 . ./config.sh
 . ./colors.sh
-. ./environment.sh
+#. ./environment.sh
 
 #send a message
 verbose "Install PHP and PHP-FPM"
@@ -58,9 +58,9 @@ if [ -d /var/www/fusionpbx ]; then
 fi
 
 #install ioncube
-if [ .$cpu_architecture = .'x86' ]; then
-	. ./ioncube.sh
-fi
+#if [ .$cpu_architecture = .'x86' ]; then
+#	. ./ioncube.sh
+#fi
 
 #restart php-fpm
 systemctl daemon-reload

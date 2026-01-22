@@ -99,10 +99,14 @@ if [ $switch_branch = "stable" ]; then
 		#apply patch
 		#patch -u /usr/src/freeswitch/src/mod/databases/mod_pgsql/mod_pgsql.c -i /usr/src/fusionpbx-install.sh/debian/resources/switch/source/mod_pgsql.patch
 	fi
-	dnf -y config-manager --set-enabled powertools
+	dnf config-manager --set-enabled powertools
 	dnf -y install epel-release
 	dnf -y makecache
-	dnf -y 	install speex-devel speexdsp-devel libedit-devel nasm ffmpeg-devel
+	dnf -y 	install speex-devel speexdsp-devel libedit-devel nasm 
+	#dnf -y install ffmpeg-devel
+	dnf config-manager --set-enabled powertools
+	dnf -y install lua-devel libpq-devel php-devel libmemcached-devel libshout-devel libsndfile-devel
+	dnf -y install libmpg123-devel
 
 fi
 
@@ -127,10 +131,12 @@ sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'endpoints/mod_vert
 sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'applications/mod_spandsp:#applications/mod_spandsp:'
 sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'applications/mod_enum:#applications/mod_enum:'
 sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'applications/mod_av:#formats/mod_av:'
+sed -i /usr/src/freeswitch-$switch_version/modules.conf -e s:'codecs/mod_opus:#codecs/mod_opus:'
 
 # prepare the build
 #./configure --prefix=/usr/local/freeswitch --enable-core-pgsql-support --disable-fhs
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/pgsql-13/lib/pkgconfig
 ./configure -C --enable-portable-binary --disable-dependency-tracking --enable-debug \
 --prefix=/usr --localstatedir=/var --sysconfdir=/etc \
 --with-openssl --enable-core-pgsql-support
