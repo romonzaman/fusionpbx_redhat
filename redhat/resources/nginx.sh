@@ -10,8 +10,16 @@ cd "$(dirname "$0")"
 #send a message
 verbose "Installing the web server"
 
+#create www-data user/group if needed
+if ! getent group www-data >/dev/null 2>&1; then
+  groupadd -r www-data
+fi
+if ! id -u www-data >/dev/null 2>&1; then
+  useradd -r -g www-data -d /usr/share/nginx -s /sbin/nologin www-data
+fi
+
 #install dependencies
-yum -y install nginx
+dnf -y install nginx
 
 #setup nginx
 mkdir -p /etc/nginx/sites-available

@@ -15,7 +15,7 @@ server {
 	}
 
 	location ~ \.php$ {
-		fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+		fastcgi_pass unix:/run/php-fpm/www.sock;
 		#fastcgi_pass 127.0.0.1:9000;
 		fastcgi_index index.php;
 		include fastcgi_params;
@@ -126,7 +126,7 @@ server {
 	}
 
 	location ~ \.php$ {
-		fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+		fastcgi_pass unix:/run/php-fpm/www.sock;
 		#fastcgi_pass 127.0.0.1:9000;
 		fastcgi_index index.php;
 		include fastcgi_params;
@@ -241,7 +241,7 @@ server {
 	}
 
 	location ~ \.php$ {
-		fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+		fastcgi_pass unix:/run/php-fpm/www.sock;
 		#fastcgi_pass 127.0.0.1:9000;
 		fastcgi_index index.php;
 		include fastcgi_params;
@@ -250,7 +250,7 @@ server {
 
 	# Allow the upgrade routines to run longer than normal
 	location = /core/upgrade/index.php {
-		fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+		fastcgi_pass unix:/run/php-fpm/www.sock;
 		#fastcgi_pass 127.0.0.1:9000;
 		fastcgi_index index.php;
 		include fastcgi_params;

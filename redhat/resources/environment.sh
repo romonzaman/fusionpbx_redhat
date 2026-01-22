@@ -17,7 +17,7 @@ if [ .$cpu_name = .'armv7l' ]; then
 	cpu_mode='32'
 	cpu_architecture='arm'
 elif [ .$cpu_name = .'armv8l' ]; then
-	# We currently have no test case for armv8l
+	# No test case for armv8l
 	os_mode='unknown'
 	cpu_mode='64'
 	cpu_architecture='arm'
@@ -49,9 +49,9 @@ else
 	error "You are using an unsupported cpu '$cpu_name'"
 	exit 3
 fi
-	
+
 if [ .$cpu_architecture = .'arm' ]; then
-	error "CentOS on arm is not supported at this time"
+	error "Red Hat on arm is not supported at this time"
 	exit 3
 elif [ .$cpu_architecture = .'x86' ]; then
 	if [ .$os_mode = .'32' ]; then

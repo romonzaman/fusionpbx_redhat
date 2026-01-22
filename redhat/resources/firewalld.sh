@@ -8,6 +8,11 @@ cd "$(dirname "$0")"
 . ./colors.sh
 
 #send a message
+dnf -y install firewalld
+systemctl enable firewalld
+systemctl start firewalld
+
+
 verbose "Configuring FirewallD"
 #ssh should be on by default
 

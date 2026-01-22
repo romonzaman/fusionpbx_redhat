@@ -11,7 +11,7 @@ ST=Idaho
 O=FusionPBX
 localityName=Boise
 commonName=$DOMAIN
-organizationUnitName=
+OU=
 emailAddress=
 "
 

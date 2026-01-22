@@ -105,7 +105,11 @@ systemctl daemon-reload
 systemctl mask wpa_supplicant.service
 systemctl stop wpa_supplicant.service
 systemctl enable fail2ban
-systemctl enable ntpd
+if systemctl list-unit-files | grep -q '^chronyd\\.service'; then
+	systemctl enable chronyd
+elif systemctl list-unit-files | grep -q '^ntpd\\.service'; then
+	systemctl enable ntpd
+fi
 systemctl enable php-fpm
 systemctl enable nginx
 systemctl enable freeswitch
