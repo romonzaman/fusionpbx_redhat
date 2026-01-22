@@ -71,11 +71,11 @@ psql --host=$database_host --port=$database_port --username=$database_username -
 
 #update the php configuration
 sed -i 's/user nginx/user freeswitch daemon/g' /etc/nginx/nginx.conf
-chown -Rf freeswitch:daemon /var/lib/nginx
+chown -Rf www-data:www-data /var/lib/nginx
 sed -ie 's/user = apache/user = freeswitch/g' /etc/php-fpm.d/www.conf
 
 #update permissions
-chown -R freeswitch:daemon /var/lib/php/session
+chown -R www-data:www-data /var/lib/php/session
 
 #update the permissions
 chown -R freeswitch.daemon /etc/freeswitch /var/lib/freeswitch /var/log/freeswitch /usr/share/freeswitch /var/www/fusionpbx

@@ -67,7 +67,7 @@ cd $cwd
 
 #add the cache directory
 mkdir -p /var/cache/fusionpbx
-chown -R freeswitch:daemon /var/cache/fusionpbx
+chown -R www-data:www-data /var/cache/fusionpbx
 
 #get the source code
 git clone -b 5.4 https://github.com/fusionpbx/fusionpbx.git /var/www/fusionpbx

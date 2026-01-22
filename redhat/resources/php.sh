@@ -40,10 +40,11 @@ php_ini_file='/etc/php.ini'
 sed -ie "s#;date.timezone =#date.timezone = $TIMEZ#g" $php_ini_file
 sed -ie 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' $php_ini_file
 sed -ie 's|listen = 127.0.0.1:9000|listen = /run/php-fpm/www.sock|g' /etc/php-fpm.d/www.conf
-sed -ie 's/;listen.owner = nobody/listen.owner = freeswitch/g' /etc/php-fpm.d/www.conf
-sed -ie 's/;listen.group = nobody/listen.group = daemon/g' /etc/php-fpm.d/www.conf
-sed -ie 's/user = apache/user = freeswitch/g' /etc/php-fpm.d/www.conf
-sed -ie 's/group = apache/group = daemon/g' /etc/php-fpm.d/www.conf
+sed -ie 's/;listen.owner = nobody/listen.owner = www-data/g' /etc/php-fpm.d/www.conf
+sed -ie 's/;listen.group = nobody/listen.group = www-data/g' /etc/php-fpm.d/www.conf
+sed -ie 's/user = www-data/user = www-data/g' /etc/php-fpm.d/www.conf
+sed -ie 's/group = www-data/group = www-data/g' /etc/php-fpm.d/www.conf
+sed -ie 's/listen.acl_users/;listen.acl_users/g' /etc/php-fpm.d/www.conf
 
 #make the session directory
 mkdir -p /var/lib/php/session

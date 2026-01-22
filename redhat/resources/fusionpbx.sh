@@ -34,7 +34,7 @@ fi
 
 #add the cache directory
 mkdir -p /var/cache/fusionpbx
-chown -R freeswitch:daemon /var/cache/fusionpbx
+chown -R www-data:www-data /var/cache/fusionpbx
 
 #get the source code
 git clone $BRANCH https://github.com/fusionpbx/fusionpbx.git /var/www/fusionpbx
