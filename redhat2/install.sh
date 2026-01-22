@@ -53,6 +53,8 @@ dnf -y install git ghostscript libtiff-devel libtiff libtiff-devel at
 #rpm -Uvh cert-forensics-tools-release*rpm
 #dnf -y --enablerepo=forensics install lame
 
+cwd=$(pwd)
+
 cd /usr/src
 wget https://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz
 tar xvf lame-3.100.tar.gz
@@ -61,6 +63,7 @@ cd lame-3.100
 make
 make install
 
+cd $cwd
 
 #add the cache directory
 mkdir -p /var/cache/fusionpbx
